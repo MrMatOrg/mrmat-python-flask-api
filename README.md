@@ -3,7 +3,7 @@
 Boilerplate code for a Python Flask API
 
 This variant of a Python Flask API is spec-first and using [Connexion](https://github.com/zalando/connexion) to 
-implement that capability.
+implement that capability. Also see [Connexion Documentation](https://connexion.readthedocs.io/en/latest/)
 
 Features:
 
