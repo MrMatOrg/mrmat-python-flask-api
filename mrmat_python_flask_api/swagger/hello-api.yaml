@@ -7,11 +7,12 @@ consumes:
 - application/json
 produces:
 - application/json
+basePath: /0.1
 paths:
   /greeting:
     get:
       tags: [Greeting]
-      operationId: app.get_greeting
+      operationId: mrmat_python_flask_api.apis.hello_api_0_1.get_greeting
       summary: Get Greeting
       parameters:
       - name: name

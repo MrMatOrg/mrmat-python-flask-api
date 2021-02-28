@@ -23,15 +23,21 @@
 
 import sys
 import argparse
-import cli_ui
 
 import connexion
 
 from mrmat_python_flask_api import __version__
 
+app = connexion.App(__name__, specification_dir='swagger/', )
 
-def get_greeting(name: str = 'World') -> dict:
-    return {'greeting': f'Hello {name}'}
+
+@app.route('/healthz')
+def healthz():
+    """
+    Check application health
+    :return: 'OK' and a 200 upon success, a descriptive message and non-200 status code otherwise
+    """
+    return 'OK', 200
 
 
 def main() -> int:
@@ -41,15 +47,22 @@ def main() -> int:
     :return: Exit code
     """
     parser = argparse.ArgumentParser(description=f'mrmat-python-flask-api - {__version__}')
-    parser.add_argument('-q', '--quiet', action='store_true', dest='quiet', help='Silent operation')
     parser.add_argument('-d', '--debug', action='store_true', dest='debug', help='Debug')
+    parser.add_argument('--host',
+                        dest='host',
+                        required=False,
+                        default='localhost',
+                        help='Host interface to bind to')
+    parser.add_argument('--port',
+                        dest='port',
+                        required=False,
+                        default=8080,
+                        help='Port to bind to')
 
     args = parser.parse_args()
-    cli_ui.setup(verbose=args.debug, quiet=args.quiet, timestamp=True)
 
-    app = connexion.App(__name__, specification_dir='swagger/')
-    app.add_api('hello-api.yaml')
-    app.run(port=8080)
+    app.add_api('hello-api.yaml', strict_validation=True)
+    app.run(host=args.host, port=args.port, debug=args.debug)
 
     return 0
 
