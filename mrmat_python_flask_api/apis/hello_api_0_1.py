@@ -33,6 +33,7 @@ def get_greeting(name: str = 'World') -> flask.Response:
     :param name: Optional name to greet, defaults to 'World'
     :return: A flask response containing the greeting, along with a header stating the API version
     """
+    # Alternative for simple cases: return BODY, STATUS, DICT_OF_RESPONSE_HEADERS
     resp = flask.Response({'greeting': f'Hello {name}'})
     resp.headers['X-Hello-API-Version'] = __version__
     return resp
