@@ -28,7 +28,7 @@ import connexion
 
 from mrmat_python_flask_api import __version__
 
-app = connexion.App(__name__, specification_dir='swagger/', )
+app = connexion.App(__name__, specification_dir='swagger/')
 
 
 @app.route('/healthz')
@@ -61,7 +61,7 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    app.add_api('hello-api.yaml', strict_validation=True)
+    app.add_api('hello-api-0_1.yaml', strict_validation=True)
     app.run(host=args.host, port=args.port, debug=args.debug)
 
     return 0

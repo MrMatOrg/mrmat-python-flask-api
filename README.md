@@ -12,3 +12,4 @@ Features:
 * Configurability via command line
 * No TLS, because this is intended to run behind a reverse proxy
 * Healthz
+* No OAuth 2, there are still some [issues](https://github.com/zalando/connexion/issues/549) with Connexion to support that
