@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  title: Hello Connexion
+  version: '0.1'
+  description: The ubiquitous Hello World
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /greeting:
+    get:
+      tags: [Greeting]
+      operationId: app.get_greeting
+      summary: Get Greeting
+      parameters:
+      - name: name
+        in: query
+        type: string
+        pattern: "^[a-zA-Z0-9]*$"
+        default: "World"
+      responses:
+        200:
+          description: Return a greeting
+          schema:
+            $ref: '#/definitions/Greeting'
+
+definitions:
+  Greeting:
+    type: object
+    required:
+    - greeting
+    properties:
+      greeting:
+        type: string
+        description: The desired greeting
+        example: "Hello Susie"
+
